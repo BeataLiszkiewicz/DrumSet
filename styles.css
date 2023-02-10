@@ -1,0 +1,118 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  main {
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  header {
+    background-color: rgba(62, 61, 61, 0.754);
+    font-size: 14px;
+    padding-left: 2em;
+  }
+  
+  .main_text {
+    color: rgba(248, 248, 255, 0.636);
+    text-align: center;
+  }
+  
+  .music {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: space-around;
+    height: 60%;
+    min-height: 90px;
+    max-width: 400px;
+  }
+  .icon_set{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .icon {
+    width: 12.5%;
+    max-height: 100%;
+    aspect-ratio: 1/1;
+    /* height: 50%; */
+    min-width: 44px;
+    min-height: 44px;
+    border: 1px outset rgba(255, 255, 255, 0.177);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #fff;
+    text-shadow:
+    0 0 4px #fff,
+    0 0 11px #fff,
+    0 0 19px #fff,
+    0 0 40px rgb(127, 102, 163),
+    0 0 80px rgb(127, 102, 163),
+    0 0 90px rgb(127, 102, 163),
+    0 0 100px rgb(127, 102, 163),
+    0 0 150px rgb(127, 102, 163);
+  }
+  
+  
+  
+  .set {
+    margin: 2rem 1rem 0 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .button {
+    height: 100%;
+    max-height: 116px;
+    aspect-ratio: 2.5/1;
+    color: ghostwhite;
+    background: linear-gradient(90deg, #414141, #1a1919);
+  }
+  
+  .bl {
+    grid-column: 1 / span 2;
+    
+  }
+  
+  @media screen and (min-width:576px) {
+    .buttons_display{
+      display: grid;
+      grid-template-columns: 15% 1fr 15%;
+    }
+  
+    .set{
+      grid-column: 2;
+    }
+    
+  }
+  
+  @media screen and (min-width:992px) {
+    .buttons_display{
+      display: grid;
+      grid-template-columns: 15% 1fr 15%;
+    }
+  
+    .set{
+      display: flex;
+      flex-wrap: wrap;
+     
+    }
+  
+    .button{
+      height: 100%;
+      aspect-ratio: 1/1;
+    }
+    
+  }
+  
+  
