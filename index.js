@@ -99,14 +99,21 @@ function playList() {
     alert("You have no sounds on your list. Use sounds buttons to add them.");
   } else {
     for (let i = 0; i < iconDivList.length; i++) {
-      if (iconDivList[i].firstChild === null) {
+      if (document.getElementById(i).firstChild === null) {
+        continue;
       } else {
-        const soundToPlay = soundsList.filter(
-          (sound) => sound.icon === document.getElementById(i).firstChild.id
-        );
-        soundToPlay[0].playSound();
+        task(i);
       }
     }
+  }
+
+  function task(i) {
+    setTimeout(function () {
+      const soundToPlay = soundsList.filter(
+        (sound) => sound.icon === document.getElementById(i).firstChild.id
+      );
+      soundToPlay[0].playSound();
+    }, 230 * i);
   }
 }
 
