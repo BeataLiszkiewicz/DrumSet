@@ -2,12 +2,15 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    background-color: black;
   }
   
   main {
-    background-color: black;
     width: 100vw;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 5% auto;
   }
   
   header {
@@ -19,10 +22,11 @@
   .main_text {
     color: rgba(248, 248, 255, 0.636);
     text-align: center;
+    padding: 0 1.5rem;
   }
   
   .music {
-    margin-top: 1rem;
+    margin: 1rem 0;
     display: flex;
     flex-wrap: wrap;
     align-content: space-between;
@@ -30,11 +34,13 @@
     height: 60%;
     min-height: 90px;
     max-width: 400px;
+    
   }
   .icon_set{
     display: flex;
     justify-content: center;
     align-items: center;
+    
   }
   
   .icon {
@@ -59,16 +65,21 @@
     0 0 90px rgb(127, 102, 163),
     0 0 100px rgb(127, 102, 163),
     0 0 150px rgb(127, 102, 163);
+    
+   
   }
   
-  
+  .buttons_display{
+    margin-top: 2rem;
+  }
   
   .set {
-    margin: 2rem 1rem 0 1rem;
+    margin: 0 1rem 1rem 1rem;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     gap: 2rem;
+    
   }
   
   .button {
@@ -87,7 +98,7 @@
   @media screen and (min-width:576px) {
     .buttons_display{
       display: grid;
-      grid-template-columns: 15% 1fr 15%;
+      grid-template-columns: 10% 1fr 10%;
     }
   
     .set{
@@ -96,22 +107,60 @@
     
   }
   
-  @media screen and (min-width:992px) {
+  @media screen and (min-width:768px) {
+    main{
+      display: flex;
+      flex-direction: column;
+      margin: 15% auto;
+      align-items: center;
+      position: relative;
+    }
+
+    .main_text{
+      font-size: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .icon_set{
+      position:absolute;
+      top:8%
+    }
+
     .buttons_display{
-      display: grid;
-      grid-template-columns: 15% 1fr 15%;
+      width: 100%;
+      height: 30%;
+      margin:0 10%;
+      grid-template-columns: 2% 1fr 2%;
+     
     }
   
     .set{
-      display: flex;
-      flex-wrap: wrap;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      margin: 0;
      
     }
   
     .button{
-      height: 100%;
+      width:100%;
       aspect-ratio: 1/1;
+      grid-row: 2;
     }
+
+    #clap, #play{
+      grid-row:1;
+    }
+
+    #play{
+      grid-column:8;
+    }
+
+
+    
+
+    
     
   }
   

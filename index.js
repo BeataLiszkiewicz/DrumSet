@@ -18,12 +18,12 @@ const featuresList = [
   ["boom", "g", "Boom.wav", "fa-bomb"],
   ["clap", "w", "Clap.wav", "fa-hands-clapping"],
   ["hihat", "s", "HiHat.wav", "fa-hat-cowboy-side"],
-  ["kick", "d", "Kick.wav", "fa-drum"],
+  ["kick", "d", "Kick.wav", "fa-person-running"],
   ["openhat", "f", "OpenHat.wav", "fa-lock-open"],
-  ["ride", "h", "Ride.wav", "fa-compact-disc"],
-  ["snare", "j", "Snare.wav", "fa-grip-lines-vertical"],
-  ["tink", "l", "Tink.wav", "fa-circle-stop"],
-  ["tom", "k", "Tom.wav", "fa-drum-steelpan"],
+  ["ride", "h", "Ride.wav", "fa-horse"],
+  ["snare", "j", "Snare.wav", "fa-drum"],
+  ["tink", "l", "Tink.wav", "fa-droplet"],
+  ["tom", "k", "Tom.wav", "fa-user"],
 ];
 
 const soundsList = [];
@@ -122,8 +122,10 @@ function playList() {
 
 document.getElementById("play").addEventListener("mousedown", playList);
 document.addEventListener("keydown", function (event) {
+  console.log(playList)
   if (event.key === "p") {
     playList();
+    console.log(playList)
   }
 });
 
