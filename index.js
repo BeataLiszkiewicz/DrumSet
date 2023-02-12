@@ -100,7 +100,9 @@ function playList() {
   } else {
     for (let i = 0; i < iconDivList.length; i++) {
       if (document.getElementById(i).firstChild === null) {
-        continue;
+        setTimeout(function () {
+          void 0;
+        }, 1000);
       } else {
         task(i);
       }
@@ -112,9 +114,28 @@ function playList() {
       const soundToPlay = soundsList.filter(
         (sound) => sound.icon === document.getElementById(i).firstChild.id
       );
+
       soundToPlay[0].playSound();
     }, 230 * i);
   }
 }
 
 document.getElementById("play").addEventListener("mousedown", playList);
+document.addEventListener("keydown", function (event) {
+  if (event.key === "p") {
+    playList();
+  }
+});
+
+function historyChange(divId) {
+  if (document.getElementById(divId).firstChild) {
+    document.getElementById(divId).firstChild.remove();
+  }
+}
+
+const soundHistory = document.getElementsByClassName("icon");
+for (let i = 0; i < soundHistory.length; i++) {
+  document.getElementById(soundHistory[i].id).addEventListener("click", () => {
+    historyChange(i);
+  });
+}
