@@ -95,7 +95,7 @@ document.addEventListener("keydown", function (event) {
 function playList() {
   const soundsIcons = document.querySelectorAll(".fa-solid");
   const iconDivList = document.getElementsByClassName("icon");
-  let isRunning;
+
   if (soundsIcons.length === 0) {
     alert("You have no sounds on your list. Use sounds buttons to add them.");
   } else {
