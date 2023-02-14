@@ -34,10 +34,15 @@ featuresList.forEach((feature) => {
   soundsList.push(new PercussionSound(name, key, sample, icon));
 });
 
+// Function call playSound method for certain object from soundList array. Position of object in array is given as argument to the function.
 function soundAfterEvent(soundIndex) {
   soundsList[soundIndex].playSound();
 }
 
+// Function create <i> tag with class from Font Awsme library in first div.icon without child. 
+// If there is no div.icon without child, user gets choice if next sounch should erase current sound history or not. 
+// Approval for deletion is store in a session storage.
+// Icon class is taken from soundsList array, based on argument given to the function.
 function iconAfterEvent(soundIndex) {
   const iconDivList = document.getElementsByClassName("icon");
   const iconList = document.querySelectorAll(".fa-solid");
@@ -76,7 +81,7 @@ function iconAfterEvent(soundIndex) {
   }
 }
 
-//With anonymous function in EventListener, function is not called directly but we can pass function definition and pass argument to it.
+
 soundsList.forEach((sound, index) => {
   document.getElementById(sound.name).addEventListener("mousedown", () => {
     soundAfterEvent(index);
@@ -87,11 +92,19 @@ soundsList.forEach((sound, index) => {
 document.addEventListener("keydown", function (event) {
   const keys = soundsList.map((sound) => sound.key).indexOf(event.key);
   if (keys > -1) {
+    document.getElementById(soundsList[keys].name).style.boxShadow =
+      "0 0 4px #ffffff, 0 0 11px #ffffff, 0 0 19px #ffffffcf,0 0 40px rgba(34, 98, 217, 0.486), 0 0 80px rgb(34, 98, 217, 0.486),0 0 90px rgb(34, 98, 217, 0.486), 0 0 100px rgb(34, 98, 217, 0.486),0 0 ";
+    setTimeout(function () {
+      document.getElementById(soundsList[keys].name).style.boxShadow = "none";
+    }, 230);
     soundAfterEvent(keys);
     iconAfterEvent(keys);
   }
 });
 
+// Function collect all icon#id and based on them call playSound method from soundsList array.
+// Order of played sounds is same as order of icons in .music.
+// When <div> in .music is empty, function does nothing for this div.
 function playList() {
   const soundsIcons = document.querySelectorAll(".fa-solid");
   const iconDivList = document.getElementsByClassName("icon");
@@ -115,7 +128,6 @@ function playList() {
       const soundToPlay = soundsList.filter(
         (sound) => sound.icon === document.getElementById(i).firstChild.id
       );
-
       soundToPlay[0].playSound();
     }, 230 * i);
   }
@@ -124,10 +136,16 @@ function playList() {
 document.getElementById("play").addEventListener("mousedown", playList);
 document.addEventListener("keydown", function (event) {
   if (event.key === "p") {
+    document.getElementById("play").style.boxShadow =
+      "0 0 4px #ffffff, 0 0 11px #ffffff, 0 0 19px #ffffffcf,0 0 40px rgba(34, 98, 217, 0.486), 0 0 80px rgb(34, 98, 217, 0.486),0 0 90px rgb(34, 98, 217, 0.486), 0 0 100px rgb(34, 98, 217, 0.486),0 0 ";
+    setTimeout(function () {
+      document.getElementById("play").style.boxShadow = "none";
+    }, 230);
     playList();
   }
 });
 
+// Function allows to delete icon from history after click on icon parent.
 function historyChange(divId) {
   if (document.getElementById(divId).firstChild) {
     document.getElementById(divId).firstChild.remove();
