@@ -39,8 +39,8 @@ function soundAfterEvent(soundIndex) {
   soundsList[soundIndex].playSound();
 }
 
-// Function create <i> tag with class from Font Awsme library in first div.icon without child. 
-// If there is no div.icon without child, user gets choice if next sounch should erase current sound history or not. 
+// Function create <i> tag with class from Font Awsme library in first div.icon without child.
+// If there is no div.icon without child, user gets choice if next sounch should erase current sound history or not.
 // Approval for deletion is store in a session storage.
 // Icon class is taken from soundsList array, based on argument given to the function.
 function iconAfterEvent(soundIndex) {
@@ -81,30 +81,49 @@ function iconAfterEvent(soundIndex) {
   }
 }
 
+function buttonShadowOn(keyIdentifier) {
+  document.getElementById(keyIdentifier).style.boxShadow =
+    "0 0 4px #ffffff, 0 0 11px #ffffff, 0 0 19px #ffffffcf,0 0 40px rgba(34, 98, 217, 0.486), 0 0 80px rgb(34, 98, 217, 0.486),0 0 90px rgb(34, 98, 217, 0.486), 0 0 100px rgb(34, 98, 217, 0.486),0 0 ";
+}
+
+function buttonShadowOff(keyIdentifier) {
+  setTimeout(function () {
+    document.getElementById(keyIdentifier).style.boxShadow = "none";
+  }, 300);
+}
 
 soundsList.forEach((sound, index) => {
   document.getElementById(sound.name).addEventListener("mousedown", () => {
+    buttonShadowOn(sound.name);
     soundAfterEvent(index);
     iconAfterEvent(index);
+    buttonShadowOff(sound.name);
   });
 });
 
 document.addEventListener("keydown", function (event) {
   const keys = soundsList.map((sound) => sound.key).indexOf(event.key);
   if (keys > -1) {
-    document.getElementById(soundsList[keys].name).style.boxShadow =
-      "0 0 4px #ffffff, 0 0 11px #ffffff, 0 0 19px #ffffffcf,0 0 40px rgba(34, 98, 217, 0.486), 0 0 80px rgb(34, 98, 217, 0.486),0 0 90px rgb(34, 98, 217, 0.486), 0 0 100px rgb(34, 98, 217, 0.486),0 0 ";
-    setTimeout(function () {
-      document.getElementById(soundsList[keys].name).style.boxShadow = "none";
-    }, 230);
+    buttonShadowOn(soundsList[keys].name);
     soundAfterEvent(keys);
     iconAfterEvent(keys);
+    buttonShadowOff(soundsList[keys].name);
   }
 });
 
 // Function collect all icon#id and based on them call playSound method from soundsList array.
 // Order of played sounds is same as order of icons in .music.
 // When <div> in .music is empty, function does nothing for this div.
+function divOpacityOn(divIdentifier) {
+  document.getElementById(divIdentifier).style.color = "#0099e6";
+}
+
+function divOpacityOff(divIdentifier) {
+  setTimeout(function () {
+    document.getElementById(divIdentifier).style.color = "white";
+  }, 230);
+}
+
 function playList() {
   const soundsIcons = document.querySelectorAll(".fa-solid");
   const iconDivList = document.getElementsByClassName("icon");
@@ -113,35 +132,45 @@ function playList() {
     alert("You have no sounds on your list. Use sounds buttons to add them.");
   } else {
     for (let i = 0; i < iconDivList.length; i++) {
-      if (document.getElementById(i).firstChild === null) {
-        setTimeout(function () {
-          void 0;
-        }, 1000);
-      } else {
-        task(i);
-      }
+      play(i);
     }
-  }
-
-  function task(i) {
-    setTimeout(function () {
-      const soundToPlay = soundsList.filter(
-        (sound) => sound.icon === document.getElementById(i).firstChild.id
-      );
-      soundToPlay[0].playSound();
-    }, 230 * i);
   }
 }
 
-document.getElementById("play").addEventListener("mousedown", playList);
+function play(i) {
+  setTimeout(function () {
+    if (document.getElementById(i).firstChild === null) {
+      doNothing(i);
+    } else {
+      task(i);
+    }
+  }, i * 230);
+}
+
+function doNothing(i) {
+  divOpacityOn(i);
+  divOpacityOff(i);
+}
+
+function task(i) {
+  const soundToPlay = soundsList.filter(
+    (sound) => sound.icon === document.getElementById(i).firstChild.id
+  );
+  divOpacityOn(i);
+  soundToPlay[0].playSound();
+  divOpacityOff(i);
+}
+
+document.getElementById("play").addEventListener("mousedown", () => {
+  buttonShadowOn("play");
+  playList();
+  buttonShadowOff("play");
+});
 document.addEventListener("keydown", function (event) {
   if (event.key === "p") {
-    document.getElementById("play").style.boxShadow =
-      "0 0 4px #ffffff, 0 0 11px #ffffff, 0 0 19px #ffffffcf,0 0 40px rgba(34, 98, 217, 0.486), 0 0 80px rgb(34, 98, 217, 0.486),0 0 90px rgb(34, 98, 217, 0.486), 0 0 100px rgb(34, 98, 217, 0.486),0 0 ";
-    setTimeout(function () {
-      document.getElementById("play").style.boxShadow = "none";
-    }, 230);
+    buttonShadowOn("play");
     playList();
+    buttonShadowOff("play");
   }
 });
 

@@ -78,18 +78,12 @@ header {
   background: linear-gradient(90deg, #414141, #1a1919);
   border-radius: 3%;
   line-height: 1.5;
+  
 }
 
 .fa-regular{
   background-color: #343434;
 }
-
-.button:active {
-  box-shadow: 0 0 4px #ffffff, 0 0 11px #ffffff, 0 0 19px #ffffffcf,
-    0 0 40px rgba(34, 98, 217, 0.486), 0 0 80px rgb(34, 98, 217, 0.486),
-    0 0 90px rgb(34, 98, 217, 0.486), 0 0 100px rgb(34, 98, 217, 0.486), 0 0;
-}
-
 
 @media screen and (min-width: 576px) {
   .buttons_display {
@@ -144,6 +138,8 @@ header {
     width: 100%;
     aspect-ratio: 1/1;
     grid-row: 2;
+    font-size: 1.3vw;
+    word-wrap: break-word;
   }
 
   #clap,
