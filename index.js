@@ -114,14 +114,16 @@ document.addEventListener("keydown", function (event) {
 // Function collect all icon#id and based on them call playSound method from soundsList array.
 // Order of played sounds is same as order of icons in .music.
 // When <div> in .music is empty, function does nothing for this div.
-function divOpacityOn(divIdentifier) {
-  document.getElementById(divIdentifier).style.color = "#0099e6";
+function divEffectOn(divIdentifier) {
+  document.getElementById(divIdentifier).style.textShadow = "none";
+  document.getElementById(divIdentifier).style.color = "#ffffff8b";
 }
 
-function divOpacityOff(divIdentifier) {
+function divEffectOff(divIdentifier) {
   setTimeout(function () {
-    document.getElementById(divIdentifier).style.color = "white";
-  }, 230);
+    document.getElementById(divIdentifier).style.color = "#ffffffcf";
+    document.getElementById(divIdentifier).style.textShadow = "0 0 4px #ffffffcf, 0 0 11px #ffffffcf, 0 0 19px #ffffffcf,0 0 40px rgba(34, 98, 217, 0.486), 0 0";
+  }, 240);
 }
 
 function playList() {
@@ -144,21 +146,21 @@ function play(i) {
     } else {
       task(i);
     }
-  }, i * 230);
+  }, i * 240);
 }
 
 function doNothing(i) {
-  divOpacityOn(i);
-  divOpacityOff(i);
+  divEffectOn(i);
+  divEffectOff(i);
 }
 
 function task(i) {
   const soundToPlay = soundsList.filter(
     (sound) => sound.icon === document.getElementById(i).firstChild.id
   );
-  divOpacityOn(i);
+  divEffectOn(i);
   soundToPlay[0].playSound();
-  divOpacityOff(i);
+  divEffectOff(i);
 }
 
 document.getElementById("play").addEventListener("mousedown", () => {
@@ -168,6 +170,7 @@ document.getElementById("play").addEventListener("mousedown", () => {
 });
 document.addEventListener("keydown", function (event) {
   if (event.key === "p") {
+    
     buttonShadowOn("play");
     playList();
     buttonShadowOff("play");
