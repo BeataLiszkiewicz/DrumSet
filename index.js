@@ -122,7 +122,8 @@ function divEffectOn(divIdentifier) {
 function divEffectOff(divIdentifier) {
   setTimeout(function () {
     document.getElementById(divIdentifier).style.color = "#ffffffcf";
-    document.getElementById(divIdentifier).style.textShadow = "0 0 4px #ffffffcf, 0 0 11px #ffffffcf, 0 0 19px #ffffffcf,0 0 40px rgba(34, 98, 217, 0.486), 0 0";
+    document.getElementById(divIdentifier).style.textShadow =
+      "0 0 4px #ffffffcf, 0 0 11px #ffffffcf, 0 0 19px #ffffffcf,0 0 40px rgba(34, 98, 217, 0.486), 0 0";
   }, 240);
 }
 
@@ -170,7 +171,6 @@ document.getElementById("play").addEventListener("mousedown", () => {
 });
 document.addEventListener("keydown", function (event) {
   if (event.key === "p") {
-    
     buttonShadowOn("play");
     playList();
     buttonShadowOff("play");
@@ -190,3 +190,55 @@ for (let i = 0; i < soundHistory.length; i++) {
     historyChange(i);
   });
 }
+
+function markCurrentPosition(id) {
+  document.getElementById(id).style.borderColor = "lightblue";
+}
+
+function unmarkLastPosition(id) {
+  document.getElementById(id).style.borderColor = "rgba(255, 255, 255, 0.177)";
+}
+
+const currentPosition = [];
+document.addEventListener("keydown", function (event) {
+  if (event.key === " ") {
+    markCurrentPosition(0);
+    currentPosition.push("0");
+  }
+});
+
+document.addEventListener("keydown", function (event) {
+  if (currentPosition.length === 1) {
+    switch (event.key) {
+      case "ArrowRight":
+        if (currentPosition[0] === "15") {
+          currentPosition.length = 0;
+          currentPosition.push("0");
+          markCurrentPosition(0);
+          unmarkLastPosition(15);
+        } else {
+          let position = currentPosition[0];
+          markCurrentPosition(Number(currentPosition[0]) + 1);
+          currentPosition.push(Number(currentPosition[0]) + 1);
+          currentPosition.splice(0, 1);
+          unmarkLastPosition(position);
+        }
+        break;
+
+      case "ArrowLeft":
+        if (currentPosition[0] === "0") {
+          markCurrentPosition(15);
+          unmarkLastPosition(0);
+          currentPosition.length = 0;
+          currentPosition.push("15");
+        } else {
+          let position = currentPosition[0];
+          markCurrentPosition(Number(currentPosition[0]) - 1);
+          currentPosition.push(Number(currentPosition[0]) - 1);
+          currentPosition.splice(0, 1);
+          unmarkLastPosition(position);
+        }
+        break;
+    }
+  }
+});
