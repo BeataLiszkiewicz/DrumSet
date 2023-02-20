@@ -2,12 +2,16 @@ class PercussionSound {
   constructor(name, key, sample, icon) {
     this.name = name;
     this.key = key;
-    this.sample = sample;
+    this.sample = sample[0];
+    this.sample2 = sample[1];
     this.icon = icon;
   }
   playSound() {
     const music = new Howl({
-      src: [`./assets/sounds/${this.sample}`],
+      src: [
+        `./assets/sounds/${this.sample}`,
+        `./assets/sounds/${this.sample2}`,
+      ],
     });
 
     music.play();
@@ -15,15 +19,15 @@ class PercussionSound {
 }
 
 const featuresList = [
-  ["boom", "g", "Boom.wav", "fa-bomb"],
-  ["clap", "w", "Clap.wav", "fa-hands-clapping"],
-  ["hihat", "s", "HiHat.wav", "fa-hat-cowboy-side"],
-  ["kick", "d", "Kick.wav", "fa-person-running"],
-  ["openhat", "f", "OpenHat.wav", "fa-lock-open"],
-  ["ride", "h", "Ride.wav", "fa-horse"],
-  ["snare", "j", "Snare.wav", "fa-drum"],
-  ["tink", "l", "Tink.wav", "fa-droplet"],
-  ["tom", "k", "Tom.wav", "fa-user"],
+  ["boom", "g", ["Boom.wav", "Boom.mp3"], "fa-bomb"],
+  ["clap", "w", ["Clap.wav", "Clap.mp3"], "fa-hands-clapping"],
+  ["hihat", "s", ["HiHat.wav", "HiHat.mp3"], "fa-hat-cowboy-side"],
+  ["kick", "d", ["Kick.wav", "Kick.mp3"], "fa-person-running"],
+  ["openhat", "f", ["OpenHat.wav", "OpenHat.mp3"], "fa-lock-open"],
+  ["ride", "h", ["Ride.wav", "Ride.mp3"], "fa-horse"],
+  ["snare", "j", ["Snare.wav", "Snare.mp3"], "fa-drum"],
+  ["tink", "l", ["Tink.wav", "Tink.mp3"], "fa-droplet"],
+  ["tom", "k", ["Tom.wav", "Tom.mp3"], "fa-user"],
 ];
 
 const soundsList = [];
