@@ -171,6 +171,12 @@ document.getElementById("play").addEventListener("mousedown", () => {
 });
 document.addEventListener("keydown", function (event) {
   if (event.key === "p") {
+    if (!sessionStorage.getItem("KEYBOARD_CHANGE_INSTRUCTION")) {
+      alert(
+        "To change sound history with your keyboard, press Spacebar then select with arrows icon you want to erase and confirm deletion by pressing Enter. To turn of edition mode, press Spacebar again"
+      );
+      sessionStorage.setItem("KEYBOARD_CHANGE_INSTRUCTION", "true");
+    }
     buttonShadowOn("play");
     playList();
     buttonShadowOff("play");
@@ -191,10 +197,12 @@ for (let i = 0; i < soundHistory.length; i++) {
   });
 }
 
+// Function mark active div with icon when user navigates among it with arrows
 function markCurrentPosition(id) {
   document.getElementById(id).style.borderColor = "lightblue";
 }
 
+// Function unmark inactive div with icon when user navigates among it with arrows
 function unmarkLastPosition(id) {
   document.getElementById(id).style.borderColor = "rgba(255, 255, 255, 0.177)";
 }
@@ -202,8 +210,13 @@ function unmarkLastPosition(id) {
 const currentPosition = [];
 document.addEventListener("keydown", function (event) {
   if (event.key === " ") {
-    markCurrentPosition(0);
-    currentPosition.push("0");
+    if (currentPosition.length < 1) {
+      markCurrentPosition(0);
+      currentPosition.push(0);
+    } else {
+      unmarkLastPosition(currentPosition[0]);
+      currentPosition.length = 0;
+    }
   }
 });
 
@@ -211,9 +224,9 @@ document.addEventListener("keydown", function (event) {
   if (currentPosition.length === 1) {
     switch (event.key) {
       case "ArrowRight":
-        if (currentPosition[0] === "15") {
+        if (currentPosition[0] === 15) {
           currentPosition.length = 0;
-          currentPosition.push("0");
+          currentPosition.push(0);
           markCurrentPosition(0);
           unmarkLastPosition(15);
         } else {
@@ -226,11 +239,11 @@ document.addEventListener("keydown", function (event) {
         break;
 
       case "ArrowLeft":
-        if (currentPosition[0] === "0") {
+        if (currentPosition[0] === 0) {
           markCurrentPosition(15);
           unmarkLastPosition(0);
           currentPosition.length = 0;
-          currentPosition.push("15");
+          currentPosition.push(15);
         } else {
           let position = currentPosition[0];
           markCurrentPosition(Number(currentPosition[0]) - 1);
@@ -239,6 +252,29 @@ document.addEventListener("keydown", function (event) {
           unmarkLastPosition(position);
         }
         break;
+
+      case "ArrowDown":
+      case "ArrowUp":
+        if (currentPosition[0] < 8) {
+          let position = currentPosition[0];
+          markCurrentPosition(Number(currentPosition[0]) + 8);
+          currentPosition.push(Number(currentPosition[0]) + 8);
+          currentPosition.splice(0, 1);
+          unmarkLastPosition(position);
+        } else if (currentPosition[0] >= 8) {
+          let position = currentPosition[0];
+          markCurrentPosition(Number(currentPosition[0]) - 8);
+          currentPosition.push(Number(currentPosition[0]) - 8);
+          currentPosition.splice(0, 1);
+          unmarkLastPosition(position);
+        }
+        break;
     }
+  }
+});
+
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Enter" && currentPosition.length === 1) {
+    historyChange(Number(currentPosition[0]));
   }
 });

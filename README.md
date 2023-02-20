@@ -15,3 +15,4 @@ Application stores on a screen max. 16 sound icons. When limit is exceed, user n
 When used agree for history removal, this approval will be saved for the future.
 To hear sound history as a music set, user has to click play button or "p" on a keyboard.
 When user clicks on sound icon, sound will be erased from history. 
+To erase icon from history with keyboard, user has to press Spacebar, then with arrows find icon that wants to delete and approve deletion with Enter key. To leave this mode, use has to click Spacebar once again.
